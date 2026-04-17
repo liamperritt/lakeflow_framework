@@ -1,0 +1,22 @@
+# Manual smoke test for the composite action that runs scripts/validate_dataflows.py.
+# Run from the Actions tab → "Test validate-dataflows composite action" → Run workflow.
+
+name: Test validate-dataflows composite action
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-samples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate sample dataflows
+        uses: databricks-solutions/lakeflow_framework/.github/actions/validate-dataflows@feature/validate-dataflows-github-action
+        with:
+          path: samples
